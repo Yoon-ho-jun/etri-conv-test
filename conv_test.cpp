@@ -1,13 +1,19 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
-
+#include <iostream>
 
 int main ( int argc, char** argv )
 {
+    if (argc < 2) {
+        std::cout << "no filename given." << std::endl;
+        std::cout << "usage: " << argv[0] << " image" << std::endl;
+        return -1;
+    }
+
     cv::Mat src, kernel, dst;
 
     // Load an image
-    src = cv::imread( "index.jpg" );
+    src = cv::imread( argv[1] );
     if( !src.data )  { return -1; }
 
     // Make filter

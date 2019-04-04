@@ -1,0 +1,20 @@
+$ git fetch upstreams
+
+$ git checkout upstreams/master   //upstreams/master폴더로 이동
+
+$ git pull    //pull = fetch+merge
+ //conflict 발생하면 폴더 켜서 
+   <<<<<<<<<<<
+   Aaaaaaaa
+   >>>>>>>>>>>
+   Aaaaaaaaa
+   
+   두 가지가 뜨는데 새로운 것을 살리고 예전 것을 삭제하면 된다.
+
+$ git commit -am "update"
+
+$ git checkout master
+
+$ git checkout upstreams/master --Makefile
+
+//깃 허브 업데이트 파일 받아오는 단계

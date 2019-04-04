@@ -1,12 +1,23 @@
 CC = g++
-CFLAGS = -g -Wall -std=c++11
+CFLAGS = -Wall -std=c++11
 SRCS = $(shell find . -name "*.cpp")
-PROG = ${SRCS:.cpp=.bin}
+OBJS = ${SRCS:.cpp=.o}
+PROG = ${OBJS:.o=.bin}
 
-OPENCV = `pkg-config opencv --cflags --libs`
-LIBS = $(OPENCV)
+OPENCV_FLAGS = `pkg-config opencv --cflags`
+OPENCV_LIBS = `pkg-config opencv --libs`
+
+LIBS += $(OPENCV_LIBS)
+CFLAGS += $(OPENCV_FLAGS)
 
 binaries: $(PROG)
 
-$(PROG):$(SRCS)
-	$(CC) $(CFLAGS) -o $@ $< $(LIBS)
+$(PROG): %.bin : %.o
+	@$(CC) $(CFLAGS) -o $@ $< $(LIBS)
+
+$(OBJS): %.o : %.cpp
+	@$(CC) -c $(CFLAGS) $<
+
+clean:
+	@- rm -rf $(PROG)
+	@- rm -rf $(OBJS)

@@ -13,17 +13,17 @@ int your_conv( cv::Mat src,  //matrix
     int src_width = src.cols;
    
 
-    int x,y,i,j,k;
+    int x,y,i,j;
 
-    int kernel_hieght = kernel.rows;
+    int kernel_height = kernel.rows;
     int kernel_width = kernel.cols;
     
 
     int dst_height;
     int dst_width;
     
-    dst_height = (src_height + 2 * padding - kernel_hieght)/stride +1;
-    dst_width = (src_width + 2 * padding - kernel_width)/stride +1;
+    dst_height = 수식 입력 ;
+    dst_width = 3;
     // src.ptr<unsigned char>(i)[ calculate INDEX]
 
     // MAKE YOUR OWN CONVOLUTION PROCESS
@@ -32,9 +32,11 @@ int your_conv( cv::Mat src,  //matrix
 	for(y=0; y<dst_width; y++){
 
 		for(i=0; i<dst_height; i++){
-			for(j=0; j<dst_width; j++){
-				for(k=0; k<3; k++)
-					dst.at<float>(x,y) += (src.at<float>(i,j,k) * kernel.at<float>(i,j,k));		
+			for(j=i; j<i+3; j++){
+				
+				
+				dst.at<float>(x,y) += (src.at<float>(i,j) * kernel.at<float>(i,i));
+					
 			}
 		}
 	}
